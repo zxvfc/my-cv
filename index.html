@@ -171,9 +171,25 @@
       background: #1958bd;
     }
 
+    @page {
+      size: A4;
+      margin: 0;
+    }
+
     @media print {
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+      }
+
       .download-pdf {
         display: none;
+      }
+
+      .a4-container {
+        box-sizing: border-box;
+        margin: 0;
       }
     }
   </style>
