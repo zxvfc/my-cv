@@ -21,16 +21,20 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Generate PDF from index.html
+      - name: Generate PDFs from index.html
         run: |
           CHROME="$(command -v google-chrome-stable || command -v google-chrome || command -v chromium || command -v chromium-browser)"
           mkdir -p dist
           cp index.html photo.jpg .nojekyll dist/
           "$CHROME" --headless --disable-gpu --no-sandbox --no-pdf-header-footer \
-            --print-to-pdf="$PWD/dist/cv-isipchuk.pdf" "file://$PWD/index.html"
+            --print-to-pdf="$PWD/dist/cv-isipchuk.pdf" "file://$PWD/index.html?lang=en"
+          "$CHROME" --headless --disable-gpu --no-sandbox --no-pdf-header-footer \
+            --print-to-pdf="$PWD/dist/cv-isipchuk-ru.pdf" "file://$PWD/index.html?lang=ru"
 
-      - name: Verify PDF
-        run: test -s dist/cv-isipchuk.pdf && file dist/cv-isipchuk.pdf
+      - name: Verify PDFs
+        run: |
+          test -s dist/cv-isipchuk.pdf && file dist/cv-isipchuk.pdf
+          test -s dist/cv-isipchuk-ru.pdf && file dist/cv-isipchuk-ru.pdf
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
