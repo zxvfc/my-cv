@@ -112,25 +112,43 @@
       min-width: 0;
       display: flex;
       flex-direction: column;
-      gap: 50px;
+      gap: 16px;
+      font-size: 14px;
     }
 
     .education {
       display: flex;
       flex-direction: column;
-      gap: 30px;
+      gap: 20px;
     }
 
     .ed-record {
       display: flex;
       flex-direction: column;
-      gap: 8px;
+      gap: 6px;
     }
 
     .skills {
       display: flex;
       flex-direction: column;
-      gap: 20px;
+      gap: 10px;
+    }
+
+    .languages {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .skill-group {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .skill-category {
+      font-weight: 600;
+      font-size: 12px;
     }
 
     .job-record {
@@ -481,35 +499,65 @@
                 Май 2018</span></div>
           </div>
         </div>
+        <div class="languages">
+          <span class="section-title"><span lang="en">Languages</span><span lang="ru">Языки</span></span>
+          <ul class="skill-set">
+            <li><span lang="en">Russian — Native</span><span lang="ru">Русский — родной</span></li>
+            <li><span lang="en">English — Fluent</span><span lang="ru">Английский — свободно</span></li>
+          </ul>
+        </div>
         <div class="skills">
           <span class="section-title"><span lang="en">Skills</span><span lang="ru">Навыки</span></span>
-          <ul class="skill-set">
-            <li>Java</li>
-            <li>Kotlin</li>
-            <li>Go</li>
-            <li>JavaScript</li>
-            <li>TypeScript</li>
-            <li>HTML</li>
-            <li>CSS</li>
-          </ul>
-          <ul class="skill-set">
-            <li>Spring</li>
-            <li>React.js</li>
-            <li>Next.js</li>
-            <li>Node.js</li>
-            <li>Tailwind</li>
-            <li>Vite</li>
-            <li>GORM</li>
-          </ul>
-          <ul class="skill-set">
-            <li>Linux</li>
-            <li>Tomcat</li>
-            <li>Nginx</li>
-            <li>Cassandra</li>
-            <li>MySQL</li>
-            <li>ZooKeeper</li>
-            <li>Docker</li>
-          </ul>
+          <div class="skill-group">
+            <span class="skill-category"><span lang="en">Languages</span><span lang="ru">Языки
+                программирования</span></span>
+            <ul class="skill-set">
+              <li>Java</li>
+              <li>Kotlin</li>
+              <li>Go</li>
+              <li>JavaScript</li>
+              <li>TypeScript</li>
+              <li>HTML</li>
+              <li>CSS</li>
+            </ul>
+          </div>
+          <div class="skill-group">
+            <span class="skill-category"><span lang="en">Frameworks &amp; Tools</span><span lang="ru">Фреймворки и
+                инструменты</span></span>
+            <ul class="skill-set">
+              <li>Spring</li>
+              <li>React.js</li>
+              <li>Next.js</li>
+              <li>Node.js</li>
+              <li>Tailwind</li>
+              <li>Vite</li>
+              <li>GORM</li>
+            </ul>
+          </div>
+          <div class="skill-group">
+            <span class="skill-category"><span lang="en">Infrastructure &amp; Databases</span><span
+                lang="ru">Инфраструктура и базы данных</span></span>
+            <ul class="skill-set">
+              <li>Linux</li>
+              <li>Tomcat</li>
+              <li>Nginx</li>
+              <li>Cassandra</li>
+              <li>MySQL</li>
+              <li>ZooKeeper</li>
+              <li>Docker</li>
+            </ul>
+          </div>
+          <div class="skill-group">
+            <span class="skill-category"><span lang="en">Soft Skills</span><span lang="ru">Гибкие навыки</span></span>
+            <ul class="skill-set">
+              <li><span lang="en">Mentoring &amp; code review</span><span lang="ru">Наставничество и
+                  код-ревью</span></li>
+              <li><span lang="en">Technical communication</span><span lang="ru">Техническая коммуникация</span></li>
+              <li><span lang="en">Cross-functional collaboration</span><span lang="ru">Кросс-функциональное
+                  взаимодействие</span></li>
+              <li><span lang="en">Agile teamwork</span><span lang="ru">Работа в Agile-команде</span></li>
+            </ul>
+          </div>
         </div>
       </div>
     </section>
