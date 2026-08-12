@@ -1,1 +1,546 @@
-&lt;!DOCTYPE html&gt;
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    (function () {
+      var lang = null;
+      try {
+        var params = new URLSearchParams(location.search);
+        lang = params.get('lang');
+        if (lang !== 'en' && lang !== 'ru') {
+          lang = localStorage.getItem('cvLang');
+        }
+      } catch (e) {}
+      if (lang !== 'en' && lang !== 'ru') lang = 'en';
+      document.documentElement.lang = lang;
+      document.documentElement.dataset.lang = lang;
+    })();
+  </script>
+  <style>
+    html {
+      font-family: Verdana, sans-serif;
+    }
+
+    html[data-lang="en"] [lang="ru"] {
+      display: none !important;
+    }
+
+    html[data-lang="ru"] [lang="en"] {
+      display: none !important;
+    }
+
+    ul {
+      padding-left: 15px;
+      margin-top: 0;
+    }
+
+    .a4-container {
+      width: 210mm;
+      height: 297mm;
+      margin: 0 auto;
+      padding: 12mm;
+      overflow: hidden;
+      display: flex;
+      gap: 20px;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .profile-header {
+      display: flex;
+      gap: 10px;
+      flex-direction: row;
+      width: 100%;
+      flex-shrink: 0;
+    }
+
+    .profile-photo {
+      height: 100px;
+      aspect-ratio: 1;
+      object-fit: cover;
+      object-position: center;
+      border-radius: 4px
+    }
+
+    .personal-info {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .name {
+      font-size: 30px;
+      font-weight: 700;
+    }
+
+    .contacts {
+      display: grid;
+      grid-template-columns: auto auto auto;
+      gap: 6px 10px;
+      font-size: 14px;
+      white-space: nowrap;
+    }
+
+    .contant-title {
+      font-weight: 600;
+    }
+
+    .main-info {
+      display: flex;
+      gap: 10px;
+      justify-content: space-between;
+      height: 100%;
+    }
+
+    .expirience {
+      flex-grow: 2;
+      flex-shrink: 1;
+
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+    }
+
+    .history {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      height: 100%;
+    }
+
+    .additional-info {
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 50px;
+    }
+
+    .education {
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+    }
+
+    .ed-record {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .skills {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .job-record {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .job-record:not(:last-of-type) {
+      /* border-bottom: 1px solid black; */
+    }
+
+    .job-header {
+      display: flex;
+      gap: 10px;
+    }
+
+    .job-header>:not(:last-child) {
+      padding-right: 10px;
+      border-right: 1px solid black;
+    }
+
+    .job-title {
+      font-weight: 600;
+    }
+
+    .period {
+      font-size: 14px;
+    }
+
+    .skill-set {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+    }
+
+    .section-title {
+      width: 100%;
+      border-bottom: 3px solid black;
+      font-size: 20px;
+      font-weight: 600;
+    }
+
+    .top-controls {
+      position: fixed;
+      top: 16px;
+      right: 16px;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .lang-switch {
+      display: flex;
+      border-radius: 6px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+    }
+
+    .lang-btn {
+      border: none;
+      cursor: pointer;
+      padding: 10px 14px;
+      font-size: 14px;
+      font-weight: 600;
+      font-family: inherit;
+      background: #fff;
+      color: #1f6feb;
+    }
+
+    .lang-btn:hover {
+      background: #e8f0fe;
+    }
+
+    .lang-btn[aria-pressed="true"] {
+      background: #1f6feb;
+      color: #fff;
+    }
+
+    .download-pdf {
+      padding: 10px 18px;
+      border-radius: 6px;
+      background: #1f6feb;
+      color: #fff;
+      font-size: 14px;
+      font-weight: 600;
+      text-decoration: none;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+    }
+
+    .download-pdf:hover {
+      background: #1958bd;
+    }
+
+    @page {
+      size: A4;
+      margin: 12mm;
+    }
+
+    @media print {
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+      }
+
+      .top-controls {
+        display: none;
+      }
+
+      .a4-container {
+        width: auto;
+        height: auto;
+        min-height: 273mm;
+        padding: 0;
+        margin: 0;
+        overflow: visible;
+      }
+
+      .job-record,
+      .ed-record {
+        break-inside: avoid;
+      }
+    }
+
+    @media screen and (max-width: 850px) {
+      .a4-container {
+        box-sizing: border-box;
+        width: 100%;
+        height: auto;
+        overflow: visible;
+        padding: 16px;
+      }
+
+      .profile-header {
+        height: auto;
+        flex-wrap: wrap;
+      }
+
+      .profile-photo {
+        width: 100px;
+        height: 100px;
+      }
+
+      .contacts {
+        grid-template-columns: 1fr;
+        gap: 6px;
+      }
+
+      .main-info {
+        flex-direction: column;
+        height: auto;
+        gap: 30px;
+      }
+
+      .history {
+        height: auto;
+        gap: 30px;
+      }
+
+      .job-header {
+        flex-wrap: wrap;
+        row-gap: 4px;
+      }
+
+      .top-controls {
+        top: 8px;
+        right: 8px;
+        gap: 6px;
+      }
+
+      .lang-btn {
+        padding: 8px 10px;
+        font-size: 12px;
+      }
+
+      .download-pdf {
+        padding: 8px 14px;
+        font-size: 12px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="top-controls">
+    <div class="lang-switch" role="group" aria-label="Language">
+      <button type="button" class="lang-btn" data-lang-btn="en" aria-pressed="true">EN</button>
+      <button type="button" class="lang-btn" data-lang-btn="ru" aria-pressed="false">RU</button>
+    </div>
+    <a class="download-pdf" href="cv-isipchuk.pdf" download target="_blank" rel="noopener noreferrer">
+      <span lang="en">Download PDF</span><span lang="ru">Скачать PDF</span>
+    </a>
+  </div>
+  <div class="a4-container">
+    <div class="profile-header">
+      <img class="profile-photo" src="photo.jpg" alt="Valentin Isipchuk" />
+      <div class="personal-info">
+        <div class="name">
+          <span lang="en">Valentin Isipchuk</span><span lang="ru">Валентин Исипчук</span>
+        </div>
+        <div class="job-title">
+          <span lang="en">Fullstack Developer</span><span lang="ru">Full-stack разработчик</span>
+        </div>
+        <div class="contacts">
+          <div><span class="contant-title">e-mail:</span> <a target="_blank" rel="noopener noreferrer"
+              href="mailto:velya.96@gmail.com">velya.96@gmail.com</a>
+          </div>
+          <div><span class="contant-title">Telegram:</span> <a target="_blank" rel="noopener noreferrer"
+              href="https://t.me/zxvfc">t.me/zxvfc</a></div>
+          <div><span class="contant-title" lang="en">Location:</span><span class="contant-title"
+              lang="ru">Локация:</span> <span lang="en">Bangkok, Thailand</span><span lang="ru">Бангкок,
+              Таиланд</span></div>
+          <div><span class="contant-title">LinkedIn:</span> <a target="_blank" rel="noopener noreferrer"
+              href="https://linkedin.com/in/va-is">linkedin.com/in/va-is</a></div>
+          <div><span class="contant-title">GitHub:</span> <a target="_blank" rel="noopener noreferrer"
+              href="https://github.com/zxvfc">github.com/zxvfc</a></div>
+        </div>
+      </div>
+    </div>
+    <section class="main-info">
+      <div class="expirience">
+        <span class="section-title"><span lang="en">Work Expirience</span><span lang="ru">Опыт работы</span></span>
+        <div class="history">
+          <div class="job-record">
+            <div class="job-header">
+              <span class="job-title"><span lang="en">Backend Developer</span><span lang="ru">Бэкенд-разработчик</span></span>
+              <span class="project-name"><a target="_blank" rel="noopener noreferrer"
+                  href="https://vc-trade.de/">VC-Trade</a></span>
+              <span><span lang="en">Remote</span><span lang="ru">Удалённо</span></span>
+            </div>
+            <div class="period">
+              <span><span lang="en">August 2018 - May 2023</span><span lang="ru">Август 2018 - Май 2023</span></span>
+            </div>
+            <ul>
+              <li><span lang="en">Developed and maintained backend services in Java/Kotlin for private debt
+                  platform</span><span lang="ru">Разрабатывал и поддерживал бэкенд-сервисы на Java/Kotlin для
+                  платформы частного долгового финансирования</span></li>
+              <li><span lang="en">Built RESTful/GraphQL APIs enabling market participants to access debt
+                  products</span><span lang="ru">Создавал RESTful/GraphQL API, обеспечивающие участникам рынка
+                  доступ к долговым продуктам</span></li>
+              <li><span lang="en">Implemented data processing systems for financial reporting and regualatory
+                  compliance</span><span lang="ru">Внедрял системы обработки данных для финансовой отчётности и
+                  соответствия нормативным требованиям</span></li>
+              <li><span lang="en">Collaborate with cross-functional teams in agile envioronment to deliver platform
+                  features</span><span lang="ru">Взаимодействовал с кросс-функциональными командами в Agile-среде
+                  для реализации функций платформы</span></li>
+              <li><span lang="en"><b>Implemented integration with external services</b>, such as Collabora for
+                  collaborative documents editing</span><span lang="ru"><b>Реализовал интеграцию с внешними
+                    сервисами</b>, такими как Collabora, для совместного редактирования документов</span></li>
+            </ul>
+          </div>
+
+          <div class="job-record">
+            <div class="job-header">
+              <span class="job-title"><span lang="en">Mentor &amp; Course Developer</span><span lang="ru">Ментор и
+                  разработчик курса</span></span>
+              <span class="project-name"><a target="_blank" rel="noopener noreferrer"
+                  href="https://hexlet.io/">Hexlet.io</a></span>
+              <span><span lang="en">Remote</span><span lang="ru">Удалённо</span></span>
+            </div>
+            <div class="period">
+              <span><span lang="en">February 2021 - August 2022</span><span lang="ru">Февраль 2021 - Август
+                  2022</span></span>
+            </div>
+            <ul>
+              <li><span lang="en"><b>Mentoring students in Java programming</b>, providing code reviews and
+                  technical guidance</span><span lang="ru"><b>Наставлял студентов по программированию на
+                    Java</b>, проводил код-ревью и давал техническую консультацию</span></li>
+              <li><span lang="en">Contributing to <b>development and improvement of Java developer
+                    curriculum</b></span><span lang="ru">Участвовал в <b>разработке и улучшении учебной программы
+                    для Java-разработчиков</b></span></li>
+              <li><span lang="en">Conducted interactive webinars on Java programming concepts and best
+                  practices</span><span lang="ru">Проводил интерактивные вебинары по концепциям и лучшим практикам
+                  программирования на Java</span></li>
+            </ul>
+          </div>
+
+          <div class="job-record">
+            <div class="job-header">
+              <span class="job-title"><span lang="en">Fullstack Developer</span><span
+                  lang="ru">Full-stack-разработчик</span></span>
+              <span class="project-name"><a target="_blank" rel="noopener noreferrer" href="https://ton.vision">TON
+                  Vision</a></span>
+              <span><span lang="en">Remote</span><span lang="ru">Удалённо</span></span>
+            </div>
+            <div class="period">
+              <span><span lang="en">February 2023 - July 2024</span><span lang="ru">Февраль 2023 - Июль
+                  2024</span></span>
+            </div>
+            <ul>
+              <li><span lang="en">Developed TON App, a <b>catalog for web3 TON blockchain applications and coin
+                    stats</b> using Next.js, TypeScript and Go</span><span lang="ru">Разработал TON App —
+                  <b>каталог web3-приложений блокчейна TON и статистики монет</b>, используя Next.js, TypeScript
+                  и Go</span></li>
+              <li><span lang="en">Developed a TWA (Telegram Web Application) in additiona to the web-site using
+                  Vite, TypeScript and Go</span><span lang="ru">Разработал TWA (Telegram Web Application) в
+                  дополнение к веб-сайту, используя Vite, TypeScript и Go</span></li>
+              <li><span lang="en"><b>Managed self-hosted infrastructure</b> with CI/CD via Github
+                  Actions</span><span lang="ru"><b>Управлял self-hosted инфраструктурой</b> с CI/CD через GitHub
+                  Actions</span></li>
+              <li><span lang="en">Handled system administration including server start, deployment, and
+                  maintenance</span><span lang="ru">Занимался системным администрированием, включая запуск
+                  серверов, развёртывание и поддержку</span></li>
+            </ul>
+          </div>
+
+          <div class="job-record">
+            <div class="job-header">
+              <span class="job-title"><span lang="en">Backend Developer</span><span lang="ru">Бэкенд-разработчик</span></span>
+              <span class="project-name"><a target="_blank" rel="noopener noreferrer"
+                  href="https://cyoda.com/">Cyoda</a></span>
+              <span><span lang="en">Remote</span><span lang="ru">Удалённо</span></span>
+            </div>
+            <div class="period">
+              <span><span lang="en">July 2024 - October 2025</span><span lang="ru">Июль 2024 - Октябрь
+                  2025</span></span>
+            </div>
+            <ul>
+              <li><span lang="en">Developed backend services and APIs for Cyoda platform using Java, Kotlin and
+                  Cassandra</span><span lang="ru">Разрабатывал бэкенд-сервисы и API для платформы Cyoda, используя
+                  Java, Kotlin и Cassandra</span></li>
+              <li><span lang="en"><b>Built Java-based jRPC/REST client library</b> enabling seamless integration
+                  with Cyoda Cloud infrastructure</span><span lang="ru"><b>Создал клиентскую библиотеку
+                    jRPC/REST на Java</b>, обеспечивающую бесшовную интеграцию с инфраструктурой Cyoda
+                  Cloud</span></li>
+              <li><span lang="en"><b>Created unified language-agnostic test suite</b> using Cucumber for Java and
+                  Python client libraries, ensuring consistent behavior across implementations</span><span
+                  lang="ru"><b>Создал унифицированный, независимый от языка набор тестов</b> на Cucumber для
+                  клиентских библиотек Java и Python, обеспечив согласованное поведение между
+                  реализациями</span></li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+      <div class="additional-info">
+        <div class="education">
+          <span class="section-title"><span lang="en">Education</span><span lang="ru">Образование</span></span>
+          <div class="ed-record">
+            <div class="job-title"><span lang="en">Software Engineering</span><span lang="ru">Программная
+                инженерия</span></div>
+            <div><span lang="en">Saint Petersburg State University <br> of Aerospace Instrumentation</span><span
+                lang="ru">Санкт-Петербургский государственный университет <br> аэрокосмического
+                приборостроения</span></div>
+            <div class="period"><span lang="en">September 2014 - May 2018</span><span lang="ru">Сентябрь 2014 -
+                Май 2018</span></div>
+          </div>
+        </div>
+        <div class="skills">
+          <span class="section-title"><span lang="en">Skills</span><span lang="ru">Навыки</span></span>
+          <ul class="skill-set">
+            <li>Java</li>
+            <li>Kotlin</li>
+            <li>Go</li>
+            <li>JavaScript</li>
+            <li>TypeScript</li>
+            <li>HTML</li>
+            <li>CSS</li>
+          </ul>
+          <ul class="skill-set">
+            <li>Spring</li>
+            <li>React.js</li>
+            <li>Next.js</li>
+            <li>Node.js</li>
+            <li>Tailwind</li>
+            <li>Vite</li>
+            <li>GORM</li>
+          </ul>
+          <ul class="skill-set">
+            <li>Linux</li>
+            <li>Tomcat</li>
+            <li>Nginx</li>
+            <li>Cassandra</li>
+            <li>MySQL</li>
+            <li>ZooKeeper</li>
+            <li>Docker</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+    (function () {
+      function applyLang(lang) {
+        document.documentElement.lang = lang;
+        document.documentElement.dataset.lang = lang;
+        var pdfLink = document.querySelector('.download-pdf');
+        if (pdfLink) pdfLink.href = lang === 'ru' ? 'cv-isipchuk-ru.pdf' : 'cv-isipchuk.pdf';
+        document.querySelectorAll('.lang-btn').forEach(function (btn) {
+          btn.setAttribute('aria-pressed', btn.dataset.langBtn === lang ? 'true' : 'false');
+        });
+      }
+
+      document.querySelectorAll('.lang-btn').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var lang = btn.dataset.langBtn;
+          try { localStorage.setItem('cvLang', lang); } catch (e) {}
+          applyLang(lang);
+        });
+      });
+
+      applyLang(document.documentElement.dataset.lang || 'en');
+    })();
+  </script>
+</body>
+
+</html>
