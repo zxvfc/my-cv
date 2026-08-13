@@ -25,7 +25,7 @@ jobs:
         run: |
           CHROME="$(command -v google-chrome-stable || command -v google-chrome || command -v chromium || command -v chromium-browser)"
           mkdir -p dist
-          cp * dist/
+          cp index.html dist/
           "$CHROME" --headless --disable-gpu --no-sandbox --no-pdf-header-footer \
             --print-to-pdf="$PWD/dist/cv-isipchuk.pdf" "file://$PWD/index.html?lang=en"
           "$CHROME" --headless --disable-gpu --no-sandbox --no-pdf-header-footer \
