@@ -164,11 +164,21 @@
     }
 
     .job-record {
-      display: block;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      column-gap: 10px;
+      align-items: baseline;
     }
 
-    .job-record>*+* {
+    .job-record>ul {
+      grid-column: 1 / -1;
       margin-top: 10px;
+      margin-bottom: 0;
+    }
+
+    .job-record>.period {
+      text-align: right;
+      white-space: nowrap;
     }
 
     .job-record:not(:last-of-type) {
@@ -299,8 +309,12 @@
         gap: 9px;
       }
 
-      .job-record>*+* {
+      .job-record>ul {
         margin-top: 2px;
+      }
+
+      .history {
+        gap: 7px;
       }
     }
 
@@ -337,6 +351,15 @@
       .job-header {
         flex-wrap: wrap;
         row-gap: 4px;
+      }
+
+      .job-record {
+        display: block;
+      }
+
+      .job-record>.period {
+        text-align: left;
+        margin-top: 6px;
       }
 
       .top-controls {
@@ -384,8 +407,7 @@
           <div><span class="contant-title">Telegram:</span> <a target="_blank" rel="noopener noreferrer"
               href="https://t.me/zxvfc">t.me/zxvfc</a></div>
           <div><span class="contant-title" lang="en">Location:</span><span class="contant-title"
-              lang="ru">Локация:</span> <span lang="en">Bangkok, Thailand</span><span lang="ru">Бангкок,
-              Таиланд</span></div>
+              lang="ru">Локация:</span> <span lang="en">Bangkok, Thailand (remote)</span><span lang="ru">Бангкок, Таиланд (удалённо)</span></div>
           <div><span class="contant-title">LinkedIn:</span> <a target="_blank" rel="noopener noreferrer"
               href="https://linkedin.com/in/va-is">linkedin.com/in/va-is</a></div>
           <div><span class="contant-title">GitHub:</span> <a target="_blank" rel="noopener noreferrer"
@@ -410,13 +432,9 @@
             <div class="job-header">
               <span class="job-title"><span lang="en">Full-stack Developer</span><span
                   lang="ru">Full-stack-разработчик</span></span>
-              <span class="project-name"><span lang="en">Zagdim &amp; freelance</span><span lang="ru">Zagdim и
-                  фриланс</span></span>
-              <span><span lang="en">Remote</span><span lang="ru">Удалённо</span></span>
+              <span class="project-name">Zagdim</span>
             </div>
-            <div class="period">
-              <span><span lang="en">2026 - Present</span><span lang="ru">2026 - настоящее время</span></span>
-            </div>
+            <div class="period"> <span><span lang="en">Mar 2026 – Present</span><span lang="ru">март 2026 – н. в.</span></span> </div>
             <ul>
               <li><span lang="en">Develop and maintain <b>4 bilingual (English/Chinese) WordPress sites</b> with
                   custom features in PHP, JavaScript and TypeScript</span><span lang="ru">Разрабатываю и
@@ -436,15 +454,39 @@
 
           <div class="job-record">
             <div class="job-header">
+              <span class="job-title"><span lang="en">Vibe Coding Mentor (part-time)</span><span lang="ru">Ментор по вайбкодингу (частично)</span></span>
+              <span class="project-name"><a target="_blank" rel="noopener noreferrer"
+                  href="https://hexlet.io/">Hexlet.io</a></span>
+            </div>
+            <div class="period"> <span><span lang="en">Sep 2026 – Present</span><span lang="ru">сент. 2026 – н. в.</span></span> </div>
+            <ul>
+              <li><span lang="en">Guide an online course on <b>vibe coding</b>, teaching students to build and ship
+                  apps with AI coding agents</span><span lang="ru">Веду онлайн-курс по <b>вайбкодингу</b>: учу
+                  студентов создавать и выпускать приложения с помощью ИИ-агентов</span></li>
+            </ul>
+          </div>
+
+          <div class="job-record">
+            <div class="job-header">
+              <span class="job-title"><span lang="en">Full-stack Developer</span><span
+                  lang="ru">Full-stack-разработчик</span></span>
+              <span class="project-name"><span lang="en">Freelance</span><span lang="ru">Фриланс</span></span>
+            </div>
+            <div class="period"> <span><span lang="en">Dec 2025 – Mar 2026</span><span lang="ru">дек. 2025 – март 2026</span></span> </div>
+            <ul>
+              <li><span lang="en">Delivered web development, DevOps and AI automation projects for
+                  clients</span><span lang="ru">Выполнял проекты по веб-разработке, DevOps и
+                  ИИ-автоматизации для клиентов</span></li>
+            </ul>
+          </div>
+
+          <div class="job-record">
+            <div class="job-header">
               <span class="job-title"><span lang="en">Backend Developer</span><span lang="ru">Бэкенд-разработчик</span></span>
               <span class="project-name"><a target="_blank" rel="noopener noreferrer"
                   href="https://cyoda.com/">Cyoda</a></span>
-              <span><span lang="en">Remote</span><span lang="ru">Удалённо</span></span>
             </div>
-            <div class="period">
-              <span><span lang="en">July 2024 - October 2025</span><span lang="ru">Июль 2024 - Октябрь
-                  2025</span></span>
-            </div>
+            <div class="period"> <span><span lang="en">Jul 2024 – Oct 2025</span><span lang="ru">июль 2024 – окт. 2025</span></span> </div>
             <ul>
               <li><span lang="en">Developed backend services and APIs for Cyoda platform using Java, Kotlin and
                   Cassandra, serving international enterprise clients across the EU</span><span
@@ -469,12 +511,8 @@
                   lang="ru">Full-stack-разработчик</span></span>
               <span class="project-name"><a target="_blank" rel="noopener noreferrer" href="https://ton.vision">TON
                   Vision</a></span>
-              <span><span lang="en">Remote</span><span lang="ru">Удалённо</span></span>
             </div>
-            <div class="period">
-              <span><span lang="en">February 2023 - July 2024</span><span lang="ru">Февраль 2023 - Июль
-                  2024</span></span>
-            </div>
+            <div class="period"> <span><span lang="en">Feb 2023 – Jul 2024</span><span lang="ru">февр. 2023 – июль 2024</span></span> </div>
             <ul>
               <li><span lang="en">Developed <a target="_blank" rel="noopener noreferrer"
                     href="https://ton.app">TON App</a>, a <b>catalog covering 1,500-2,000+ web3 TON blockchain
@@ -498,11 +536,8 @@
               <span class="job-title"><span lang="en">Backend Developer</span><span lang="ru">Бэкенд-разработчик</span></span>
               <span class="project-name"><a target="_blank" rel="noopener noreferrer"
                   href="https://vc-trade.de/">VC-Trade</a></span>
-              <span><span lang="en">Remote</span><span lang="ru">Удалённо</span></span>
             </div>
-            <div class="period">
-              <span><span lang="en">August 2018 - May 2023</span><span lang="ru">Август 2018 - Май 2023</span></span>
-            </div>
+            <div class="period"> <span><span lang="en">Aug 2018 – May 2023</span><span lang="ru">авг. 2018 – май 2023</span></span> </div>
             <ul>
               <li><span lang="en">Developed and maintained backend services in Java/Kotlin for a private debt
                   platform supporting <b>€14B+ in placed transaction volume</b></span><span lang="ru">Разрабатывал
@@ -525,15 +560,11 @@
 
           <div class="job-record">
             <div class="job-header">
-              <span class="job-title"><span lang="en">Mentor &amp; Course Developer</span><span lang="ru">Ментор, автор курса</span></span>
+              <span class="job-title"><span lang="en">Java Mentor (part-time)</span><span lang="ru">Ментор по Java (частично)</span></span>
               <span class="project-name"><a target="_blank" rel="noopener noreferrer"
                   href="https://hexlet.io/">Hexlet.io</a></span>
-              <span><span lang="en">Remote, part-time</span><span lang="ru">Удалённо, частично</span></span>
             </div>
-            <div class="period">
-              <span><span lang="en">February 2021 - August 2022</span><span lang="ru">Февраль 2021 - Август
-                  2022</span></span>
-            </div>
+            <div class="period"> <span><span lang="en">Feb 2021 – Aug 2022</span><span lang="ru">февр. 2021 – авг. 2022</span></span> </div>
             <ul>
               <li><span lang="en"><b>Mentored 100+ students in Java programming</b>, providing code reviews and
                   technical guidance</span><span lang="ru"><b>Наставлял 100+ студентов по
@@ -624,8 +655,7 @@
             <div><span lang="en">Saint Petersburg State University <br> of Aerospace Instrumentation</span><span
                 lang="ru">Санкт-Петербургский государственный университет <br> аэрокосмического
                 приборостроения</span></div>
-            <div class="period"><span lang="en">September 2014 - May 2018</span><span lang="ru">Сентябрь 2014 -
-                Май 2018</span></div>
+            <div class="period"><span lang="en">Sep 2014 – May 2018</span><span lang="ru">сент. 2014 – май 2018</span></div>
           </div>
         </div>
       </div>
